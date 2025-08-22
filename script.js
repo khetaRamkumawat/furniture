@@ -1,6 +1,5 @@
-// =====================
+
 // EmailJS Config
-// =====================
 const EMAILJS_PUBLIC_KEY = "QGTD16YNQCEIPJn5j";
 const EMAILJS_SERVICE_ID = "service_dr5n82o";
 const EMAILJS_TEMPLATE_ID = "template_f89d1nm";
@@ -10,9 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   emailjs.init(EMAILJS_PUBLIC_KEY);
 });
 
-// =====================
+
 // Cart State
-// =====================
 let cart = [];
 const cartCountEl = document.getElementById("cartCount");
 const cartTableBody = document.getElementById("cartTableBody");
@@ -21,9 +19,8 @@ const orderForm = document.getElementById("orderForm");
 const orderJsonEl = document.getElementById("order_json");
 const orderTotalEl = document.getElementById("order_total");
 
-// =====================
+
 // Product Cards
-// =====================
 const allProductCards = Array.from(document.querySelectorAll(".product-card"));
 let filteredProducts = [...allProductCards]; // initially all
 let currentPage = 1;
@@ -37,9 +34,7 @@ paginationContainer.className = "d-flex justify-content-center mt-4";
 paginationContainer.id = "pagination";
 productsWrapper.after(paginationContainer);
 
-// =====================
 // Render Products with Pagination
-// =====================
 function renderPagination() {
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
@@ -77,9 +72,7 @@ function renderPagination() {
 }
 renderPagination();
 
-// =====================
 // Search + Filter
-// =====================
 const searchInput = document.getElementById("searchInput");
 const filterSelect = document.getElementById("filterSelect");
 
@@ -99,7 +92,7 @@ function filterProducts() {
   renderPagination();
 }
 
-// Search form submit → scroll to Products
+// Search form submit  scroll to Products
 document
   .getElementById("searchForm")
   .addEventListener("submit", function (e) {
@@ -115,9 +108,8 @@ document
 if (searchInput) searchInput.addEventListener("input", filterProducts);
 if (filterSelect) filterSelect.addEventListener("change", filterProducts);
 
-// =====================
+
 // Category Buttons
-// =====================
 const categoryButtons = document.querySelectorAll(".category-btn");
 if (categoryButtons) {
   categoryButtons.forEach((btn) => {
@@ -140,9 +132,7 @@ if (categoryButtons) {
   });
 }
 
-// =====================
 // Add to Cart
-// =====================
 document.querySelectorAll(".add-to-cart").forEach((btn) => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
@@ -163,9 +153,7 @@ document.querySelectorAll(".add-to-cart").forEach((btn) => {
   });
 });
 
-// =====================
 // Render Cart
-// =====================
 function renderCart() {
   cartTableBody.innerHTML = "";
   let total = 0;
@@ -226,9 +214,7 @@ function renderCart() {
   });
 }
 
-// =====================
 // View Cart
-// =====================
 const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
 document.getElementById("viewCartBtn").addEventListener("click", () => {
   if (cart.length === 0) {
@@ -239,9 +225,7 @@ document.getElementById("viewCartBtn").addEventListener("click", () => {
   renderCart();
 });
 
-// =====================
 // Checkout → EmailJS
-// =====================
 document.getElementById("checkoutBtn").addEventListener("click", async () => {
   if (cart.length === 0) {
     Swal.fire({ icon: "info", title: "Add some items first" });
@@ -283,45 +267,61 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
   }
 });
 
-// =====================
 // Contact Form → EmailJS
-// =====================
 const contactForm = document.getElementById("contactForm");
 if (contactForm) {
-  contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    let name = document.getElementById("name").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let message = document.getElementById("message").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let subject = document.getElementById("subject").value.trim();
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    if (name === "" || email === "" || message === "") {
-      Swal.fire("Error", "All fields are required!", "error");
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-      Swal.fire("Error", "Please enter a valid email!", "error");
-      return;
-    }
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let message = document.getElementById("message").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let subject = document.getElementById("subject").value.trim();
 
-    emailjs
-      .send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_CONTACT_TEMPLATE,
-        { from_name: name, from_email: email, message, phone, subject },
-        EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          Swal.fire("Success", "Message sent successfully!", "success");
-          contactForm.reset();
-        },
-        () => {
-          Swal.fire("Error", "Failed to send message to Email", "error");
+        // Validation
+        if (name === "" || email === "" || message === "") {
+            Swal.fire("Error", "All fields are required!", "error");
+            return;
         }
-      );
-  });
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+            Swal.fire("Error", "Please enter a valid email!", "error");
+            return;
+        }
+
+        // 🔹 First mail
+        emailjs.send("service_dr5n82o", "template_f89d1nm", {
+            from_name: name,
+            from_email: email,
+            message: message,
+            phone: phone,
+            subject: subject
+        }, "QGTD16YNQCEIPJn5j").then(
+            function () {
+                Swal.fire("Success", "Message send successfully!", "success");
+                contactForm.reset();
+            },
+            function (error) {
+                Swal.fire("Error", "Failed to send message to Email", "error");
+            }
+        );
+
+        // 🔹 Second mail
+        emailjs.send("service_8k2fj3r", "template_iqrooni", {
+            from_name: name,
+            from_email: email,
+            message: message,
+            phone: phone,
+            subject: subject
+        }, "x3iRyxeN9gYtv3rhQ").then(
+            function () {
+                console.log("Message also sent to Email-2 successfully!");
+            },
+            function (error) {
+                console.log("Error sending to Email-2", error);
+            }
+        );
+    });
 }
 
 // =====================
