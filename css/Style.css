@@ -1,0 +1,257 @@
+body {
+    font-family: Arial, sans-serif;
+}
+    html {
+      scroll-behavior: smooth;
+    }
+
+h1,
+h2 {
+    color: #333;
+}
+
+.card img {
+    object-fit: cover;
+}
+
+.navbar-brand {
+    color:#f5b50a !important;
+}
+
+.carousel-item img {
+    height: 500px;
+    /* apne requirement ke hisab se */
+    object-fit: cover;
+    /* image ka aspect ratio maintain karega */
+    object-position: center;
+    /* image ka center visible rahega */
+}
+
+.contact-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info i {
+    font-size: 1.5rem;
+    color: #8B4513;
+    margin-right: 10px;
+}
+
+.social-icons a {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: #8B4513;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #ff6600;
+}
+
+/* .hp {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+} */
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.carousel-img {
+    height: 500px;
+    /* Adjust height as needed */
+    object-fit: cover;
+    /* Crop and center */
+}
+
+@media (max-width: 768px) {
+    .carousel-img {
+        height: 300px;
+        /* Smaller height on mobile */
+    }
+}
+
+.pp {
+    height: 280px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #0056b3, #003580);
+    transform: scale(1.05);
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Thumbnail Styling */
+.thumb-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.thumb-img:hover {
+    border-color: #007bff;
+    transform: scale(1.05);
+}
+
+.thumb-img.active {
+    border-color: #007bff;
+}
+
+.rel {
+    text-align: center;
+    background-color: black;
+    color: aliceblue;
+}
+
+.product-card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.product-card:hover img {
+    transform: scale(1.03);
+    transition: .3s;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+.rel{
+    margin-top:20px ;
+}
+.rrs{
+    margin-top: 30px;
+}
+/* Product card hover */
+.pc-hover {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.pc-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+/* Rating stars color tweak (uses Bootstrap Icons) */
+.rating .bi-star-fill,
+.rating .bi-star-half { color: #f5b50a; }
+.rating .bi-star { color: #d8d8d8; }
+
+
+/* Hover Zoom Wrapper */
+.zoom-wrap{
+  position: relative;
+  overflow: hidden;     /* image zoom pe card ke bahar na nikle */
+  border-radius: .5rem; /* optional: rounded look */
+}
+
+/* Image base state */
+.zoom-wrap .zoom-img{
+  width: 100%;
+  display: block;
+  transition: transform .25s ease, transform-origin .1s ease;
+  will-change: transform;
+  cursor: zoom-in;      /* hover pe zoom ka feel */
+}
+
+/* Hover pe zoom */
+.zoom-wrap:hover .zoom-img{
+  transform: scale(2);  /* zoom level: 1.5–2.5 try kar sakte ho */
+}
+.image-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.image-wrapper img {
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.2); /* zoom effect on hover */
+}
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.zoom-img {
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.image-wrapper:hover .zoom-img {
+  transform: scale(2); /* zoom kitna karna hai */
+  cursor: zoom-in;
+}
+
+/* Image ko cursor ke hisaab se move karne ke liye */
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper .zoom-img {
+  transform-origin: center center; /* pehle default */
+}
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.zoom-img {
+  width: 100%;
+  transition: transform 0.3s ease, transform-origin 0.3s ease;
+}
+
+.image-wrapper:hover .zoom-img {
+  transform: scale(2); /* Zoom level */
+}
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.zoom-img {
+  width: 100%;
+}
+
+.magnifier {
+  display: none;
+  position: absolute;
+  border: 2px solid #333;
+  border-radius: 50%;
+  cursor: none;
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 200% 200%; /* Zoom level */
+  pointer-events: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
